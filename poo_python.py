@@ -8,14 +8,14 @@ class Character:
     
     #Constructor de la clase
     def __init__(self, name, strength, intelligence, defense, life):
-        self.name = name
+        self.__name = name
         self.strength = strength
         self.intelligence = intelligence
         self.defense = defense 
         self.life = life
 
     def imprimir_atributos(self):
-        print(self.name)
+        print(self.__name)
         print("Strength: ",self.strength)
         print("Inteligence: ",self.intelligence)
         print("Defense: ",self.defense)
@@ -32,22 +32,20 @@ class Character:
     
     def die(self):
         self.life = 0
-        print("self.name has died")
+        print("self.__name has died")
         #return self.life <= 0
 
     def damage(self, enemy):
-        return self.strength - enemy.defense
+        return max(0, self.strength - enemy.defense)
     
     def attack(self, enemy):
         damage = self.damage(enemy)
-        enemy.life = enemy.life - damage
+        enemy.life = max(0, enemy.life - damage)
         #enemy.life -= damage
         print("------attack------")
-        print(self.name, "has made", damage, "damage to", enemy.name)
-        print("life of" , enemy.name , "is", enemy.life)
+        print(self.__name, "has made", damage, "damage to", enemy.__name)
+        print("life of" , enemy.__name , "is", enemy.life)
     
-
-
 #Variable del constructor vacio que almacena la clase
 print("------------Character------------")
 my_character = Character("Dante", 100, 3, 70, 100)
@@ -70,14 +68,14 @@ my_enemy.imprimir_atributos()
 # my_character.level_up(10, 1, 5)
 # my_character.imprimir_atributos()
 
-# my_character.name = "Pompompurin"
+# my_character.__name = "Pompompurin"
 # my_character.strength = 10
 # my_character.intelligence = 10
 # my_character.defense = 10
 # my_character.life = 100
 
 #Imprimir la variable con su respectivo atributo
-# print("The name of my character is:" ,my_character.name)
+# print("The name of my character is:" ,my_character.__name)
 # print("The strength of my character is:" ,my_character.strength)
 # print("The intelligence of my character is:" ,my_character.intelligence)   
 # print("The defense of my character is:" ,my_character.defense)
