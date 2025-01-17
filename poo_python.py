@@ -47,8 +47,82 @@ class Character:
         print("life of" , enemy.name , "is", enemy.life)
     
 class Figther(Character):
-    pass
-Tlatoani = Figther("Apocalipto", 50,70,30,100)
+     #Sobreescribir constructor
+    def __init__(self, name, strength, intelligence, defense, life, sword):
+        super().__init__(name, strength, intelligence, defense, life)
+        self.sword = sword
+
+    #Sobreescribir impresión
+    def imprimir_atributos(self):
+        super().imprimir_atributos()
+        print("Sword: ", self.sword)
+
+    def elegir_arma(self):
+        opcion = int(input("Choose your weapon: \n 1.obsidian spear, daño 10 \n 2.chaya spear, daño 5 \n:"))
+        if opcion == 1:
+            self.sword = 10
+        elif opcion == 2:
+            self.sword = 5
+        else:
+            print("Invalid option")
+            self.elegir_arma()
+
+    #Sobreescribir calculo de daño
+    def damage(self, enemy):
+        return self.strength + self.sword - enemy.defense
+
+class Wizard(Character):
+     #Sobreescribir constructor
+    def __init__(self, name, strength, intelligence, defense, life, book):
+        super().__init__(name, strength, intelligence, defense, life)
+        self.book = book
+
+    #Sobreescribir impresión
+    def imprimir_atributos(self):
+        super().imprimir_atributos()
+        print("Book: ", self.book)
+
+    def elegir_arma(self):
+        opcion = int(input("Choose your weapon: \n 1.Programming Spells, daño 10 \n 2.Chaya book, daño 5 \n:"))
+        if opcion == 1:
+            self.book = 10
+        elif opcion == 2:
+            self.book = 5
+        else:
+            print("Invalid option")
+            self.elegir_arma()
+
+    #Sobreescribir calculo de daño
+    def damage(self, enemy):
+        return self.intelligence*self.book - enemy.defense
+
+michael_jackson = Character("Michael jackson", 20, 15, 10, 100)
+tlatoani = Figther("Apocalipto", 50,70,30,100,5)
+merlin = Wizard("Merlin", 20, 15, 10, 100, 5)
+
+# Imprimikr atributos antes de la pelea
+tlatoani.imprimir_atributos()
+print("------------")
+merlin.imprimir_atributos()
+print("------------")
+michael_jackson.imprimir_atributos()
+
+#Ataque masivos
+michael_jackson.attack(tlatoani,merlin)
+tlatoani.attack(michael_jackson,merlin)
+merlin.attack(michael_jackson,tlatoani) 
+
+tlatoani.imprimir_atributos()
+print("------------")
+merlin.imprimir_atributos()
+print("------------")
+michael_jackson.imprimir_atributos()
+
+
+# tlatoani.elegir_arma()
+# merlin.elegir_arma()
+# print(tlatoani.sword)
+
 
 # #Variable del constructor vacio que almacena la clase
 # print("------------Character------------")
